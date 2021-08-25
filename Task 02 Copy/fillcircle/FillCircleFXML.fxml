@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+
+<GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" 
+          maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+          prefHeight="400.0" prefWidth="600.0" 
+          xmlns="http://javafx.com/javafx/16" 
+          xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="fillcircle.FillCircleFXMLController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <opaqueInsets>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </opaqueInsets>
+    <children>
+        <Circle fx:id="circle1" fill="WHITE" radius="10.0" stroke="BLACK" 
+                strokeType="INSIDE" GridPane.columnIndex="2" 
+                GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </Circle>
+        <Circle fx:id="circle2" fill="WHITE" radius="10.0" stroke="BLACK" 
+                strokeType="INSIDE" GridPane.columnIndex="2" 
+                GridPane.halignment="CENTER" GridPane.rowIndex="1" 
+                GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+        </Circle>
+        <Circle fx:id="circle3" fill="WHITE" radius="10.0" stroke="BLACK" 
+                strokeType="INSIDE" GridPane.columnIndex="2" 
+                GridPane.halignment="CENTER" GridPane.rowIndex="2" 
+                GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </Circle>
+      
+        <RadioButton fx:id="radioButton1" text="Green" GridPane.columnIndex="1" 
+                     GridPane.halignment="CENTER" GridPane.rowIndex="3" 
+                     GridPane.valignment="CENTER">
+            <toggleGroup>
+                <ToggleGroup fx:id="group" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="radioButton2" text="Yellow" GridPane.columnIndex="2"
+                     GridPane.halignment="CENTER" GridPane.rowIndex="3" 
+                     GridPane.valignment="CENTER">
+            <toggleGroup>
+                <fx:reference source="group" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="radioButton3" text="Red" GridPane.columnIndex="3" 
+                     GridPane.halignment="CENTER" GridPane.rowIndex="3" 
+                     GridPane.valignment="CENTER">
+            <toggleGroup>
+                <fx:reference source="group" />
+            </toggleGroup>
+        </RadioButton>
+    </children>
+</GridPane>
