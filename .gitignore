@@ -1,1 +1,5 @@
-
+# No need to upload
+.idea
+*.iml
+out
+out/
