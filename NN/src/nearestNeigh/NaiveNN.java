@@ -1,5 +1,6 @@
 package nearestNeigh;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.*;
 
 /**
@@ -7,7 +8,6 @@ import java.util.*;
  */
 public class NaiveNN implements NearestNeigh {
     List<Point> buildPoints = new ArrayList<>();
-    List<Point> buildCopyPoints = new ArrayList<>();
     Point point = new Point();
 
     @Override
@@ -19,6 +19,7 @@ public class NaiveNN implements NearestNeigh {
 
     @Override
     public List<Point> search(Point searchTerm, int k) {
+        List<Point> buildSearchPoints = new ArrayList<>();
         if (k > 0) {
             List<Point> searchResult = new ArrayList<>();
             List<List<Object>> distanceList = new ArrayList<>();
@@ -38,7 +39,7 @@ public class NaiveNN implements NearestNeigh {
                         newList.add(i, ID);
                         newList.add(i, distance);
                     }
-                    buildCopyPoints.add(buildPoints.get(row));
+                    buildSearchPoints.add(buildPoints.get(row));
                 }
                 if (!newList.isEmpty()) {
                     distanceList.add(newList);
@@ -47,16 +48,16 @@ public class NaiveNN implements NearestNeigh {
             if (k < distanceList.size()) {
                 for (int j = 0; j < k; j++) {
                     int minIndex = minIndex(distanceList);
-                    searchResult.add(buildCopyPoints.get(minIndex));
+                    searchResult.add(buildSearchPoints.get(minIndex));
                     distanceList.remove(minIndex);
-                    buildCopyPoints.remove(minIndex);
+                    buildSearchPoints.remove(minIndex);
                 }
             } else {
-                for (int j = 0; j < buildCopyPoints.size(); j++) {
-                    searchResult.add(buildCopyPoints.get(j));
+                for (int j = 0; j < buildSearchPoints.size(); j++) {
+                    searchResult.add(buildSearchPoints.get(j));
                 }
             }
-            buildCopyPoints.clear();
+            buildSearchPoints.clear();
             return searchResult;
         } else {
             System.err.println("Value of K should be grater than 1");
@@ -69,20 +70,48 @@ public class NaiveNN implements NearestNeigh {
 
     @Override
     public boolean addPoint(Point point) {
-        // To be implemented.
-        return false;
+        boolean result = false;
+        for (int row = 0; row < buildPoints.size(); row++) {
+            if ((point.id.equals(buildPoints.get(row).id)) && (point.cat.equals(buildPoints.get(row).cat))
+                    && (point.lat == buildPoints.get(row).lat) && (point.lon == buildPoints.get(row).lon)) {
+                break;
+            }else{
+                if(row == buildPoints.size()-1){
+                    buildPoints.add(point);
+                    result = true;
+                }
+            }
+        }
+        return result;
     }
 
     @Override
     public boolean deletePoint(Point point) {
-        // To be implemented.
-        return false;
+        boolean result = false;
+        for (int row = 0; row < buildPoints.size(); row++) {
+            if (point.id.equals(buildPoints.get(row).id) && point.cat.equals(buildPoints.get(row).cat)
+                    && point.lat == buildPoints.get(row).lat && point.lon == buildPoints.get(row).lon) {
+                buildPoints.remove(row);
+                result = true;
+                break;
+            }
+        }
+        return result;
+
     }
 
     @Override
     public boolean isPointIn(Point point) {
-        // To be implemented.
-        return false;
+        boolean result = false;
+        for (int row = 0; row < buildPoints.size(); row++) {
+            if (point.id.equals(buildPoints.get(row).id) && point.cat.equals(buildPoints.get(row).cat)
+                    && point.lat == buildPoints.get(row).lat && point.lon == buildPoints.get(row).lon) {
+                buildPoints.remove(row);
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     //To find index of minimum value
